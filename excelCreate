@@ -1,0 +1,39 @@
+package com.ebeijia.constant;
+
+import java.io.*; 
+
+import jxl.*; 
+import jxl.write.*; 
+
+import org.apache.poi.hssf.usermodel.HSSFCell;  
+import org.apache.poi.hssf.usermodel.HSSFDateUtil;  
+import org.apache.poi.hssf.usermodel.HSSFRow;  
+import org.apache.poi.hssf.usermodel.HSSFSheet;  
+import org.apache.poi.hssf.usermodel.HSSFWorkbook; 
+@SuppressWarnings("unused")
+public class Write_excel {
+
+	@SuppressWarnings("deprecation")
+	public static void txtToExcel() throws IOException {
+	    BufferedReader br = new BufferedReader(new FileReader(new File(
+	            "E:\\text.txt")));
+	    HSSFWorkbook hwb = new HSSFWorkbook();
+	    HSSFSheet sheet = hwb.createSheet("pldrxkxxmb");
+	    HSSFRow firstrow = null;
+	    HSSFCell[] firstcell = null;
+	    String str = null;
+	    int i = 0;
+	    while ((str = br.readLine()) != null) {
+	        firstrow = sheet.createRow(i);
+	        firstcell = new HSSFCell[1];
+	        firstcell[0] = firstrow.createCell(0);
+	        firstcell[0].setCellValue(str);
+	        i++;
+	    }
+	    OutputStream out = new FileOutputStream("E:\\pldrxkxxmb.xls");
+	    hwb.write(out);
+	    out.close();
+	    br.close();
+	 
+	}
+}
